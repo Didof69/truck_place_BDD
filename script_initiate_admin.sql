@@ -1,1 +1,0 @@
-INSERT INTO "user" (pseudo, user_name, firstname, email, password, admin) VALUES ('Admin', 'Chevalier', 'Lydie', 'lydie.chevalier@scnf.fr', 'password', true);

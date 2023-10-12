@@ -1,5 +1,12 @@
 create database truckplace;
 
+create table "location"
+(
+    location_id SERIAL PRIMARY KEY,
+    zip_code CHAR(5) NOT null,
+    city_name VARCHAR(255) NOT null
+);
+
 create table photo
 (
     photo_id SERIAL PRIMARY KEY,
@@ -17,7 +24,7 @@ create table "user"
     firstname VARCHAR(255) NOT null,
     email VARCHAR(255) unique NOT null,    
     password CHAR(60) NOT null,
-    admin boolean,
+    admin boolean NOT NULL,
     photo_id INT,
     CONSTRAINT fk_photo FOREIGN KEY (photo_id) REFERENCES photo (photo_id)
 );
@@ -48,8 +55,8 @@ create table parking
     latitude DECIMAL (9,6),
     nb_space_all INT not null,
     nb_space_free INT not null,
-    registration_date DATE not null,
-    public_view BOOLEAN,
+    registration_date TIMESTAMP not null,
+    public_view BOOLEAN NOT NULL,
     main_road VARCHAR(255),
     direction VARCHAR(255),
     location_id INT not null,
