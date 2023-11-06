@@ -2,9 +2,11 @@ create database truckplace;
 
 create table "location"
 (
-    location_id SERIAL PRIMARY KEY,
+    insee_code CHAR(5) PRIMARY KEY,
     zip_code CHAR(5) NOT null,
-    city_name VARCHAR(255) NOT null
+    city_name VARCHAR(255) NOT null,
+    latitude DECIMAL (9,6),
+    longitude DECIMAL (9,6)
 );
 
 create table photo
@@ -24,7 +26,8 @@ create table "user"
     firstname VARCHAR(255) NOT null,
     email VARCHAR(255) unique NOT null,    
     password CHAR(60) NOT null,
-    admin boolean NOT NULL,
+    admin boolean DEFAULT false,,
+    is_delete boolean DEFAULT false,
     photo_id INT,
     CONSTRAINT fk_photo FOREIGN KEY (photo_id) REFERENCES photo (photo_id)
 );
@@ -51,18 +54,18 @@ create table parking
 (
     parking_id SERIAL PRIMARY KEY,
     parking_name VARCHAR(255) NOT null,
-    longitude DECIMAL (9,6),
     latitude DECIMAL (9,6),
+    longitude DECIMAL (9,6),
     nb_space_all INT not null,
     nb_space_free INT not null,
     registration_date TIMESTAMP not null,
     public_view BOOLEAN NOT NULL,
     main_road VARCHAR(255),
     direction VARCHAR(255),
-    location_id INT not null,
+    insee_code CHAR(5),
     user_id INT not null,
     photo_id INT,
-    CONSTRAINT fk_location FOREIGN KEY (location_id) REFERENCES "location" (location_id),
+    CONSTRAINT fk_location FOREIGN KEY (insee_code) REFERENCES "location" (insee_code),
     CONSTRAINT fk_photo FOREIGN KEY (photo_id) REFERENCES photo (photo_id),
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user" (user_id)
 );
@@ -82,6 +85,16 @@ create table "like"
 (   
     user_id INT NOT NULL,
     parking_id INT NOT NULL,
+    PRIMARY KEY (user_id , parking_id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user" (user_id),
+    CONSTRAINT fk_parking FOREIGN KEY (parking_id) REFERENCES parking (parking_id)
+);
+
+create table subscribe
+(   
+    user_id INT NOT NULL,
+    parking_id INT NOT NULL,
+    time_subscribe INT,
     PRIMARY KEY (user_id , parking_id),
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user" (user_id),
     CONSTRAINT fk_parking FOREIGN KEY (parking_id) REFERENCES parking (parking_id)

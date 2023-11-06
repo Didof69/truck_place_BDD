@@ -1,4 +1,4 @@
-INSERT INTO parking (parking_name, longitude, latitude, nb_space_all, nb_space_free, registration_date, public_view, main_road, direction, location_id, user_id) VALUES ('Lyon-Dagneux', 45.843360122, 5.071041384, 60, 60, '2023-10-10 00:00:00', true, 'A42 ', 'Pont d Ain', 161, 1),
+INSERT INTO parking (parking_name, latitude, longitude, nb_space_all, nb_space_free, registration_date, public_view, main_road, direction, location_id, user_id) VALUES ('Lyon-Dagneux', 45.843360122, 5.071041384, 60, 60, '2023-10-10 00:00:00', true, 'A42 ', 'Pont d Ain', 161, 1),
 ('Lyon-Montluel', 45.845179593, 5.070174569, 99, 99, '2023-10-10 00:00:00', true, 'A42 ', 'Lyon', 282, 1),
 ('Neyrolles', 46.158371102, 5.649307107, 7, 7, '2023-10-10 00:00:00', true, 'A40 ', 'Mâcon', 296, 1),
 ('Chazey sur Ain', 45.908787364, 5.242680949, 18, 18, '2023-10-10 00:00:00', true, 'A42 ', 'Pont d Ain', 119, 1),
