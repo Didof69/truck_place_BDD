@@ -1,5 +1,3 @@
-create database truckplace;
-
 create table "location"
 (
     insee_code CHAR(5) PRIMARY KEY,
@@ -26,8 +24,8 @@ create table "user"
     firstname VARCHAR(255) NOT null,
     email VARCHAR(255) unique NOT null,    
     password CHAR(60) NOT null,
-    admin boolean DEFAULT false,,
-    is_delete boolean DEFAULT false,
+    admin boolean NOT NULL DEFAULT false,
+    is_delete boolean NOT NULL DEFAULT false,
     photo_id INT,
     CONSTRAINT fk_photo FOREIGN KEY (photo_id) REFERENCES photo (photo_id)
 );
@@ -79,6 +77,7 @@ create table opinion
 	parking_id int not null,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user" (user_id),
     CONSTRAINT fk_parking FOREIGN KEY (parking_id) REFERENCES parking (parking_id)
+    ON DELETE CASCADE
 );
 
 create table "like"
@@ -88,16 +87,18 @@ create table "like"
     PRIMARY KEY (user_id , parking_id),
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user" (user_id),
     CONSTRAINT fk_parking FOREIGN KEY (parking_id) REFERENCES parking (parking_id)
+    ON DELETE CASCADE
 );
 
 create table subscribe
 (   
+    subscribe_id SERIAL primary key,
     user_id INT NOT NULL,
     parking_id INT NOT NULL,
-    time_subscribe INT,
-    PRIMARY KEY (user_id , parking_id),
+    unsubscribe_date TIMESTAMP NOT NULL,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES "user" (user_id),
     CONSTRAINT fk_parking FOREIGN KEY (parking_id) REFERENCES parking (parking_id)
+    ON DELETE CASCADE
 );
 
 create table service
